@@ -53,6 +53,17 @@ export default function Header() {
                 <span className="text-gray-700 font-medium">
                     {username ? username : "Carregando..."}
                 </span>
+                <span>
+                    <Link
+                        href="/login"
+                        className="text-rose-600 hover:underline ml-4"
+                        onClick={() => {
+                            localStorage.clear();
+                        }}
+                    >
+                        Sair
+                    </Link>
+                </span>
             </div>
         </header>
     );

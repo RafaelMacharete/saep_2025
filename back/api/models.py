@@ -20,11 +20,15 @@ class Historical(models.Model):
 
     movement_responsible = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.PROTECT,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
         related_name="historical_record",
     )
     product = models.ForeignKey(
         Product, 
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
         related_name="historical_records"
     )
