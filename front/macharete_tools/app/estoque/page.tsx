@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Header from "../components/header/page";
 
 export default function StockMovementPage() {
   const [products, setProducts] = useState([]);
@@ -14,7 +15,6 @@ export default function StockMovementPage() {
 
   const userId = localStorage.getItem("userId");
   console.log(userId);
-
 
   // Carrega produtos em ordem alfabética
   useEffect(() => {
@@ -54,9 +54,10 @@ export default function StockMovementPage() {
   }
 
   return (
-    <div className="min-h-screen bg-rose-50 p-10">
+    <div className="min-h-screen bg-rose-50">
+        <Header></Header>
       <div className="w-fit mx-auto">
-        <h1 className="text-2xl font-semibold text-rose-700 mb-8">
+        <h1 className="text-2xl font-semibold font text-rose-700 mb-8">
           Movimentação de Estoque
         </h1>
 

@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import Header from "./components/header/page";
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-rose-50 flex flex-col">
+      <Header></Header>
       {/* HERO */}
       <section className="flex-1 flex items-center justify-center text-center px-6 py-20">
         <div className="max-w-3xl">

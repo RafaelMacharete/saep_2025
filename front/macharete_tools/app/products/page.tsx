@@ -53,6 +53,7 @@ export default function ProductsPage() {
         setModalOpen(true);
     }
 
+
     async function handleSave() {
         if (!name || !current || !minimum) {
             alert("Preencha todos os campos obrigatórios.");
@@ -82,6 +83,10 @@ export default function ProductsPage() {
         if (res.ok) {
             fetchProducts();
             setModalOpen(false);
+                // 🔥 ALERTA AUTOMÁTICO
+            if (current < minimum) {
+                alert("A quantidade atual está menor do que o mínimo permitido!");
+            }
         } else {
             alert("Erro ao salvar. Verifique os dados.");
         }
@@ -108,6 +113,7 @@ export default function ProductsPage() {
 
     return (
         <div className="min-h-screen bg-rose-50">
+            <Header></Header>
             <div className="max-w-4xl mx-auto px-6 py-10">
                 <h1 className="text-2xl font-semibold text-rose-700 mb-6">
                     Produtos
