@@ -1,77 +1,136 @@
 "use client";
 
 import Link from "next/link";
-import Header from "./components/header/page";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Header from "./components/header/page"; // Certifique-se de que este caminho está correto
+import { CheckCircleIcon, CubeIcon, UsersIcon } from "@heroicons/react/24/solid"; // Ícones para os benefícios
 
 export default function HomePage() {
+  const router = useRouter();
+
+  // Lógica de Redirecionamento Mantida
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+
+    if (!user) {
+      router.replace("/login");
+    } else {
+      // Se o usuário estiver logado, redireciona para a raiz (que será a dashboard após o login)
+      router.replace("/");
+    }
+  }, []);
+
+  // Use as classes 'sky' para manter a paleta azul
   return (
-    <div className="min-h-screen bg-rose-50 flex flex-col">
-      <Header></Header>
-      {/* HERO */}
-      <section className="flex-1 flex items-center justify-center text-center px-6 py-20">
-        <div className="max-w-3xl">
-          <h1 className="text-4xl md:text-5xl font-bold text-rose-700 tracking-tight">
-            Macharete Tools
+    // Fundo Leve
+    <div className="min-h-screen bg-sky-50 flex flex-col">
+      {/* Header */}
+      <Header />
+        
+      {/* HERO SECTION - Mais espaçoso e com CTA */}
+      <section className="flex-1 flex items-center justify-center text-center px-6 py-28 md:py-36">
+        <div className="max-w-4xl space-y-8">
+          
+          {/* Título com destaque */}
+          <h1 className="text-5xl md:text-7xl font-extrabold text-sky-800 leading-tight tracking-tight">
+            Inventa Pro: <br />
+            <span className="text-sky-600">Gestão de Inventário</span> Descomplicada.
           </h1>
 
-          <p className="mt-4 text-gray-600 text-lg md:text-xl leading-relaxed">
-            Uma plataforma moderna e intuitiva para organizar produtos, gerenciar estoque 
-            e otimizar o fluxo operacional da sua empresa. Simples, rápida e eficiente — 
-            tudo em um só lugar.
+          <p className="mt-4 text-gray-700 text-xl md:text-2xl font-light leading-snug">
+            A solução definitiva para **monitorar seu estoque em tempo real**, otimizar
+            processos operacionais e garantir o controle total da sua empresa.
           </p>
-
+          
+          {/* CTA Principal - Botão com sombra */}
+          <div className="pt-4">
+            <Link 
+              href="/login" 
+              className="inline-block px-12 py-4 text-lg font-bold text-white bg-sky-600 rounded-full shadow-lg shadow-sky-300 hover:bg-sky-700 transition duration-300 transform hover:scale-[1.02]"
+            >
+              Comece Agora
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* BENEFÍCIOS */}
-      <section className="bg-white py-16 px-6 border-t border-rose-100">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl font-semibold text-rose-700 text-center">
-            Por que escolher o Macharete Tools?
+      {/* BENEFÍCIOS SECTION - Com cards de destaque e ícones */}
+      <section className="bg-white py-20 px-6 border-t border-sky-100">
+        <div className="max-w-6xl mx-auto">
+          {/* Título da Seção */}
+          <h2 className="text-3xl font-bold text-sky-800 text-center mb-16">
+            Por que escolher o Inventa Pro?
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-            <div className="bg-rose-50 p-6 rounded-xl border border-rose-100">
-              <h3 className="font-semibold text-rose-700 text-lg">Controle Total</h3>
-              <p className="mt-2 text-gray-600 text-sm">
-                Acompanhe produtos em tempo real, veja mínimos, alertas e atualize com poucos cliques.
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {/* CARD 1: Inventário em Tempo Real */}
+            <div className="bg-white p-8 rounded-2xl border border-sky-100 shadow-xl hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1">
+              <CubeIcon className="w-10 h-10 text-sky-600 mb-4" />
+              <h3 className="font-extrabold text-sky-700 text-xl">Inventário em Tempo Real</h3>
+              <p className="mt-3 text-gray-600 text-base">
+                Monitore o estoque com precisão. Receba alertas de mínimo e atualize saldos com segurança em poucos cliques, evitando rupturas e excessos.
               </p>
             </div>
 
-            <div className="bg-rose-50 p-6 rounded-xl border border-rose-100">
-              <h3 className="font-semibold text-rose-700 text-lg">Interface Intuitiva</h3>
-              <p className="mt-2 text-gray-600 text-sm">
-                Design minimalista pensado para velocidade e clareza. Nada de telas poluídas.
+            {/* CARD 2: Experiência do Usuário */}
+            <div className="bg-white p-8 rounded-2xl border border-sky-100 shadow-xl hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1">
+              <UsersIcon className="w-10 h-10 text-sky-600 mb-4" />
+              <h3 className="font-extrabold text-sky-700 text-xl">Experiência do Usuário</h3>
+              <p className="mt-3 text-gray-600 text-base">
+                Design limpo e focado em usabilidade. Garanta que toda a sua equipe domine a plataforma rapidamente com uma curva de aprendizado mínima.
               </p>
             </div>
 
-            <div className="bg-rose-50 p-6 rounded-xl border border-rose-100">
-              <h3 className="font-semibold text-rose-700 text-lg">Economia de Tempo</h3>
-              <p className="mt-2 text-gray-600 text-sm">
-                Cadastre, edite, exclua e organize tudo em segundos — produtividade no máximo.
+            {/* CARD 3: Otimização Operacional */}
+            <div className="bg-white p-8 rounded-2xl border border-sky-100 shadow-xl hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1">
+              <CheckCircleIcon className="w-10 h-10 text-sky-600 mb-4" />
+              <h3 className="font-extrabold text-sky-700 text-xl">Otimização Operacional</h3>
+              <p className="mt-3 text-gray-600 text-base">
+                Reduza erros manuais e acelere processos de cadastro e organização. Maximize a produtividade diária e foque no que realmente importa.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* DEPOIMENTO */}
-      <section className="py-16 px-6">
-        <div className="max-w-xl mx-auto text-center">
-          <p className="text-gray-600 text-lg italic">
-            “Desde que começamos a usar o Macharete Tools, o controle de produtos ficou muito mais simples.
-            A equipe inteira agradece.”
+      {/* DEPOIMENTO - Mais clean e centralizado */}
+      <section className="py-20 px-6 bg-sky-50">
+        <div className="max-w-2xl mx-auto text-center border-l-4 border-sky-400 pl-4">
+          <p className="text-gray-800 text-xl italic leading-relaxed">
+            “O **Inventa Pro** transformou nossa gestão. O controle de inventário ficou muito mais simples e seguro. 
+            É a ferramenta ideal para quem busca eficiência e uma plataforma que realmente funciona.”
           </p>
-          <p className="mt-4 text-rose-700 font-semibold">— Equipe de Operações</p>
+          <p className="mt-6 text-sky-700 font-bold text-lg">— Equipe de Logística e Estoque, AgroTech.</p>
         </div>
       </section>
 
-      {/* CALL TO ACTION FINAL */}
-      <section className="py-12 bg-rose-100/40 text-center border-t border-rose-200">
-        <h3 className="text-xl font-semibold text-rose-700">
-          Pronto para otimizar sua gestão?
-        </h3>
+      {/* CALL TO ACTION FINAL - Banner de Destaque */}
+      <section className="py-16 bg-sky-700 text-center">
+        <div className="max-w-4xl mx-auto px-6">
+          <h3 className="text-3xl md:text-4xl font-extrabold text-white">
+            Pronto para ter controle total do seu inventário?
+          </h3>
+          <p className="mt-4 text-sky-100 text-lg">
+            Junte-se a centenas de empresas que já transformaram a forma como gerenciam seu estoque.
+          </p>
+          
+          {/* CTA Secundário */}
+          <div className="mt-8">
+            <Link 
+              href="/login" 
+              className="inline-block px-10 py-3 text-lg font-bold text-sky-700 bg-white rounded-full shadow-lg hover:bg-sky-50 transition duration-300"
+            >
+              Acessar Plataforma
+            </Link>
+          </div>
+        </div>
       </section>
+      
+      {/* FOOTER Simples */}
+      <footer className="py-6 text-center text-sm text-gray-500 border-t border-sky-100 bg-white">
+        &copy; {new Date().getFullYear()} Inventa Pro. Todos os direitos reservados.
+      </footer>
     </div>
   );
 }
